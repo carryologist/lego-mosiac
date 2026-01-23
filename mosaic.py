@@ -44,6 +44,30 @@ def create_mosaic(input_path, output_size=32):
     print(f"White 1x1 plates/tiles: {white_count}")
     print(f"Total pieces: {black_count + white_count}")
     print(f"\nPreview saved to: mosaic_preview.png")
+    
+    # Generate LDraw file for BrickLink Studio
+    # LDraw colors: 0 = black, 15 = white
+    # Part 3024 = 1x1 plate, 3070b = 1x1 tile (flat)
+    ldr_filename = f"mosaic_{output_size}x{output_size}.ldr"
+    with open(ldr_filename, 'w') as f:
+        f.write(f"0 Coder Logo Mosaic {output_size}x{output_size}\n")
+        f.write("0 Author: Mux\n")
+        f.write("0 !LICENSE Redistributable under CCAL version 2.0\n")
+        
+        # LDraw units: 1 stud = 20 LDU, plate height = 8 LDU
+        stud = 20
+        for y in range(output_size):
+            for x in range(output_size):
+                color = 15 if pixels[x, y] > threshold else 0  # white or black
+                # Position: x * stud, 0 (y height), z * stud (flipped for top-down)
+                lx = x * stud
+                lz = y * stud
+                # 1 = line type for part, identity matrix for no rotation
+                f.write(f"1 {color} {lx} 0 {lz} 1 0 0 0 1 0 0 0 1 3070b.dat\n")
+        
+        f.write("0 STEP\n")
+    
+    print(f"LDraw file saved to: {ldr_filename}")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
