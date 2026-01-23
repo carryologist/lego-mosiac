@@ -47,6 +47,7 @@ def create_mosaic(input_path, output_size=32):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python mosaic.py <image_path>")
+        print("Usage: python mosaic.py <image_path> [size]")
         sys.exit(1)
-    create_mosaic(sys.argv[1])
+    size = int(sys.argv[2]) if len(sys.argv) > 2 else 32
+    create_mosaic(sys.argv[1], size)
