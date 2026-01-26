@@ -4,10 +4,16 @@
 from PIL import Image
 import sys
 
-def create_mosaic(input_path, output_size=32):
+def create_mosaic(input_path, output_size=32, crop_to=None):
     # Load and resize
     img = Image.open(input_path).convert('L')  # Grayscale
     img = img.resize((output_size, output_size), Image.Resampling.LANCZOS)
+    
+    # Crop to smaller centered size if specified
+    if crop_to and crop_to < output_size:
+        margin = (output_size - crop_to) // 2
+        img = img.crop((margin, margin, margin + crop_to, margin + crop_to))
+        output_size = crop_to
     
     # Threshold to black/white
     threshold = 128
