@@ -55,13 +55,14 @@ def create_mosaic(input_path, output_size=32):
         f.write("0 !LICENSE Redistributable under CCAL version 2.0\n")
         
         # LDraw units: 1 stud = 20 LDU, plate height = 8 LDU
+        # 1x1 tile origin is at center, so offset by 10 LDU (half stud)
         stud = 20
         for y in range(output_size):
             for x in range(output_size):
                 color = 15 if pixels[x, y] > threshold else 0  # white or black
-                # Position: x * stud, 0 (y height), z * stud (flipped for top-down)
-                lx = x * stud
-                lz = y * stud
+                # Position: center of each stud position
+                lx = (x * stud) + 10
+                lz = (y * stud) + 10
                 # 1 = line type for part, identity matrix for no rotation
                 f.write(f"1 {color} {lx} 0 {lz} 1 0 0 0 1 0 0 0 1 3070b.dat\n")
         
