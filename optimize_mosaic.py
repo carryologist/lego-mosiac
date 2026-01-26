@@ -4,9 +4,23 @@
 # Available tile sizes (prioritize larger pieces)
 # Format: (width, height, part_number)
 TILES = [
+    (8, 8, "41539"),   # 8x8 baseplate/tile
+    (6, 6, "6106"),    # 6x6 tile
+    (4, 4, "6179"),    # 4x4 tile
+    (8, 2, "3033"),    # 2x8 plate (use as tile)
+    (6, 2, "3795"),    # 2x6 tile
+    (2, 6, "3795"),    # 6x2 tile (rotated)
+    (4, 2, "2370"),    # 2x4 tile
+    (2, 4, "2370"),    # 4x2 tile (rotated)
+    (8, 1, "4162"),    # 1x8 tile
+    (1, 8, "4162"),    # 8x1 tile (rotated)
+    (6, 1, "6636"),    # 1x6 tile
+    (1, 6, "6636"),    # 6x1 tile (rotated)
+    (4, 1, "2431"),    # 1x4 tile
+    (1, 4, "2431"),    # 4x1 tile (rotated)
     (2, 2, "3068b"),   # 2x2 tile
     (2, 1, "3069b"),   # 1x2 tile
-    (1, 2, "3069b"),   # 2x1 tile (same part, rotated)
+    (1, 2, "3069b"),   # 2x1 tile (rotated)
     (1, 1, "3070b"),   # 1x1 tile
 ]
 
